@@ -2,6 +2,8 @@
 
 A lightweight, focused, vanilla JavaScript image lightbox library, only around **3.3KB** after minified.
 
+![screenshot](screenshot.png)
+
 ## Usage
 
 Grab [libra.min.js](https://github.com/BigCoke233/libra/blob/master/dist/libra.min.js) and put it in your project.
