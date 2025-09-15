@@ -1,5 +1,5 @@
 export default class Shadow {
-  zIndex = '100'
+  zIndex = '1000'
   isOpen = false
 
   /**
@@ -34,28 +34,28 @@ export default class Shadow {
 
   calculateStartsAndFinals() {
     // get starting state
-    this.startingState = {
+    const s = {
       top: this.element.offsetTop,
       left: this.element.offsetLeft,
       width: this.element.offsetWidth,
       height: this.element.offsetHeight
     }
 
-    // temporarily finalize element
-    // and get final state
-    this.element.classList.add('open');
-    this.element.style.width = 'unset';
-    this.element.style.height = 'unset';
+    const f = {}
 
-    this.finalState = {
-      top: this.element.offsetTop,
-      left: this.element.offsetLeft,
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight
-    }
+    // calculate final size
+    const nw = this.element.naturalWidth;
+    const nh = this.element.naturalHeight;
+    const ratio = nw / nh;
+    f.width = Math.min(nw, window.innerWidth);
+    f.height = f.width / ratio;
 
-    // re-initialize element and play animation
-    this.element.classList.remove('open');
+    // calculate final position
+    f.left = (window.innerWidth - f.width) / 2;
+    f.top = (window.innerHeight - f.height) / 2;
+
+    this.finalState = f;
+    this.startingState = s;
   }
 
   /**
@@ -97,7 +97,7 @@ export default class Shadow {
       this.element.style.height = `${currentHeight}px`;
 
       // Log current size for debugging
-      console.log(`Step ${step}: ${currentWidth}, ${currentHeight}`);
+      console.log(`Step ${step}: ${currentTop}, ${currentLeft}`);
 
       // Increase the step count
       step++;
