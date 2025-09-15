@@ -50,6 +50,11 @@ export default class Shadow {
     f.width = Math.min(nw, window.innerWidth);
     f.height = f.width / ratio;
 
+    if (f.height >= window.innerHeight) {
+      f.height = window.innerHeight;
+      f.width = f.height * ratio;
+    }
+
     // calculate final position
     f.left = (window.innerWidth - f.width) / 2;
     f.top = (window.innerHeight - f.height) / 2;
