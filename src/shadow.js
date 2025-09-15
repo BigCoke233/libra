@@ -11,7 +11,6 @@ export default class Shadow {
   constructor(image) {
     this.create(image);
     this.calculateStartsAndFinals();
-    this.bindCloseEvent();
     return this;
   }
 
@@ -31,12 +30,6 @@ export default class Shadow {
 
     document.body.appendChild(shadowImage);
     this.element = shadowImage;
-  }
-
-  bindCloseEvent() {
-    this.element.addEventListener('click', () => {
-      if (this.isOpen) this.close();
-    });
   }
 
   calculateStartsAndFinals() {

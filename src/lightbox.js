@@ -55,14 +55,27 @@ export default class LightBox {
    */
 
   openLightBox(image) {
+    image.style.visibility = 'hidden';
     const shadow = this.shadows[image.id] || new Shadow(image);
     if (!this.shadows[image.id]) {
       this.shadows[image.id] = shadow;
+      shadow.element.addEventListener('click', () => {
+        if (shadow.isOpen) this.closeLightBox(image);
+      });
     }
 
     shadow.open();
 
     this.overlay.add(shadow);
     this.overlay.show();
+  }
+
+  closeLightBox(image) {
+    image.style.visibility = 'visible';
+    const shadow = this.shadows[image.id];
+    if (!shadow) return;
+
+    shadow.close();
+    this.overlay.hide();
   }
 }
