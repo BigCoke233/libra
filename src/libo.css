@@ -31,3 +31,7 @@
     max-width: 100%;
     cursor: pointer;
 }
+
+.libo-shadow.open {
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
