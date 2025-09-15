@@ -1,4 +1,3 @@
-import Utility from './utility.js';
 import Overlay from './overlay.js';
 import Shadow from './shadow.js';
 
@@ -21,7 +20,7 @@ export default class LightBox {
     const images = document.querySelectorAll(`${this.container} img[data-libo]`);
 
     images.forEach(image => {
-      image.id = Utility.hashCode(image.src); // generate unique id for image
+      image.id = crypto.randomUUID(); // generate unique id for image
       const link = this.wrapInLink(image);
       // add event listener to open lightbox on click
       link.addEventListener('click', e => {
