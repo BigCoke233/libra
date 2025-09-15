@@ -22,7 +22,7 @@ export default class Shadow {
     return this;
   }
 
-  zoom() {
+  open() {
     // get starting state
     const startingState = {
       top: this.element.offsetTop,
@@ -33,7 +33,7 @@ export default class Shadow {
 
     // temporarily finalize element
     // and get final state
-    this.element.classList.add('zoomed');
+    this.element.classList.add('open');
     this.element.style.width = 'unset';
     this.element.style.height = 'unset';
 
@@ -45,7 +45,7 @@ export default class Shadow {
     }
 
     // re-initialize element and play animation
-    this.element.classList.remove('zoomed');
+    this.element.classList.remove('open');
     this.animate(startingState, finalState)
   }
 
@@ -81,7 +81,7 @@ export default class Shadow {
       if (step < steps) {
         requestAnimationFrame(frame);
       } else {
-        this.element.classList.add('zoomed');
+        this.element.classList.toggle('open');
       }
     };
 

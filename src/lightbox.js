@@ -46,6 +46,6 @@ export default class LightBox {
     const shadow = new Shadow(image);
     this.overlay.add(shadow);
     this.overlay.show();
-    shadow.zoom();
+    shadow.open();
   }
 }

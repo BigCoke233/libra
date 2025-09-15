@@ -19,7 +19,7 @@
     display: block;
 }
 
-.libo-shadow.zoomed {
+.libo-shadow.open {
     position: static;
     margin: 0 auto;
     max-width: 100%;
