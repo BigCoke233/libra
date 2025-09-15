@@ -2,7 +2,7 @@
 
 A lightweight, focused, vanilla JavaScript image lightbox library, only around **3.3KB** after minified.
 
-![screenshot](screenshot.png)
+![screenshot](https://github.com/BigCoke233/libra/blob/master/screenshot.gif)
 
 ## Usage
 
