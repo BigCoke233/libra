@@ -1,7 +1,21 @@
 export default class Shadow {
   zIndex = '100'
+  isOpen = false
+
+  /**
+   * ============
+   * Constructors
+   * ============
+   */
 
   constructor(image) {
+    this.create(image);
+    this.calculateStartsAndFinals();
+    this.bindCloseEvent();
+    return this;
+  }
+
+  create(image) {
     // create shadow image
     const shadowImage = document.createElement('img');
     shadowImage.src = image.src;
@@ -15,16 +29,24 @@ export default class Shadow {
     shadowImage.style.height = image.offsetHeight;
     shadowImage.style.zIndex = this.zIndex;
 
-    // append shadow image to body
     document.body.appendChild(shadowImage);
-
     this.element = shadowImage;
-    return this;
   }
 
-  open() {
+  bindCloseEvent() {
+    this.element.addEventListener('click', () => {
+      if (this.isOpen) this.close();
+    });
+  }
+
+  static find(image) {
+    const shadowId = `libo-shadow-${image.id}`;
+    return document.getElementById(shadowId);
+  }
+
+  calculateStartsAndFinals() {
     // get starting state
-    const startingState = {
+    this.startingState = {
       top: this.element.offsetTop,
       left: this.element.offsetLeft,
       width: this.element.offsetWidth,
@@ -37,7 +59,7 @@ export default class Shadow {
     this.element.style.width = 'unset';
     this.element.style.height = 'unset';
 
-    const finalState = {
+    this.finalState = {
       top: this.element.offsetTop,
       left: this.element.offsetLeft,
       width: this.element.offsetWidth,
@@ -46,10 +68,25 @@ export default class Shadow {
 
     // re-initialize element and play animation
     this.element.classList.remove('open');
-    this.animate(startingState, finalState)
   }
 
-  animate(startingState, finalState) {
+  /**
+   * ============
+   * Actions
+   * ============
+   */
+
+  open() {
+    this.isOpen = true;
+    this.animate(this.startingState, this.finalState)
+  }
+
+  close() {
+    this.isOpen = false;
+    this.animate(this.finalState, this.startingState);
+  }
+
+  animate(starts, finals) {
     // Set up the interval for smooth transition
     const steps = 20; // Number of steps for smoothness
     let step = 0;
@@ -60,10 +97,10 @@ export default class Shadow {
       const progress = step / steps;
 
       // Interpolate the current values based on progress
-      const currentTop = startingState.top + (finalState.top - startingState.top) * progress;
-      const currentLeft = startingState.left + (finalState.left - startingState.left) * progress;
-      const currentWidth = startingState.width + (finalState.width - startingState.width) * progress;
-      const currentHeight = startingState.height + (finalState.height - startingState.height) * progress;
+      const currentTop = starts.top + (finals.top - starts.top) * progress;
+      const currentLeft = starts.left + (finals.left - starts.left) * progress;
+      const currentWidth = starts.width + (finals.width - starts.width) * progress;
+      const currentHeight = starts.height + (finals.height - starts.height) * progress;
 
       // Update the element's style
       this.element.style.top = `${currentTop}px`;

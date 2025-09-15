@@ -5,6 +5,12 @@ import Shadow from './shadow.js';
 export default class LightBox {
   overlay = new Overlay();
 
+  /**
+   * ============
+   * Initializers
+   * ============
+   */
+
   constructor({ container }) {
     this.container = container;
     this.init();
@@ -42,10 +48,17 @@ export default class LightBox {
     });
   }
 
+  /**
+   * ============
+   * Actions
+   * ============
+   */
+
   openLightBox(image) {
-    const shadow = new Shadow(image);
+    const shadow = Shadow.find(image) || new Shadow(image);
+    shadow.open();
+
     this.overlay.add(shadow);
     this.overlay.show();
-    shadow.open();
   }
 }
