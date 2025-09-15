@@ -4,6 +4,8 @@ A lightweight, focused, vanilla JavaScript image lightbox library, only around *
 
 ![screenshot](https://github.com/BigCoke233/libra/blob/master/screenshot.gif)
 
+_*GIF might appear slower than actual._
+
 ## Usage
 
 Grab [libra.min.js](https://github.com/BigCoke233/libra/blob/master/dist/libra.min.js) and put it in your project.
