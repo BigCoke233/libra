@@ -2,6 +2,7 @@ import Overlay from './overlay.js';
 import Shadow from './shadow.js';
 
 export default class LightBox {
+  currentImage = null;
   shadows = {};
 
   /**
@@ -20,7 +21,7 @@ export default class LightBox {
   initOverlay() {
     this.overlay = new Overlay();
     this.overlay.element.addEventListener('click', e => {
-      this.closeAll();
+      this.closeCurrent();
     });
   }
 
@@ -41,12 +42,12 @@ export default class LightBox {
     // keyboard shortcuts
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' || e.key === ' ') {
-        this.closeAll();
+        this.closeCurrent();
       }
     });
     // scroll to dismiss
     document.body.addEventListener('wheel', e => {
-      this.closeAll();
+      this.closeCurrent();
     });
   }
 
@@ -74,24 +75,39 @@ export default class LightBox {
    */
 
   openLightBox(image) {
+    // hide and store original image
     image.style.visibility = 'hidden';
+    this.currentImage = image;
+
+    // get shadow of this image
     const shadow = this.shadows[image.id] || new Shadow(image);
     if (!this.shadows[image.id]) {
       this.shadows[image.id] = shadow;
     }
 
+    // place and open shadow
     if (!document.body.contains(shadow.element)) shadow.placeItself();
     shadow.open();
+
     this.overlay.show();
   }
 
   closeLightBox(image) {
+    // show and unstore original image
     image.style.visibility = 'visible';
+    this.currentImage = null;
+
+    // close shadow
     const shadow = this.shadows[image.id];
     if (!shadow) return;
-
     shadow.close();
+
     this.overlay.hide();
+  }
+
+  closeCurrent() {
+    if (!this.currentImage) return;
+    this.closeLightBox(this.currentImage);
   }
 
   closeAll() {
