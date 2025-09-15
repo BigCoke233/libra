@@ -41,23 +41,28 @@ export default class Shadow {
       height: this.element.offsetHeight
     }
 
-    const f = {}
+    const f = {};
+    const margin = 50;
 
     // calculate final size
     const nw = this.element.naturalWidth;
     const nh = this.element.naturalHeight;
     const ratio = nw / nh;
-    f.width = Math.min(nw, window.innerWidth);
+
+    const ww = window.innerWidth - margin*2;
+    const wh = window.innerHeight - margin*2;
+
+    f.width = Math.min(nw, ww);
     f.height = f.width / ratio;
 
-    if (f.height >= window.innerHeight) {
-      f.height = window.innerHeight;
+    if (f.height >= wh) {
+      f.height = wh;
       f.width = f.height * ratio;
     }
 
     // calculate final position
-    f.left = (window.innerWidth - f.width) / 2;
-    f.top = (window.innerHeight - f.height) / 2;
+    f.left = (ww - f.width) / 2 + margin;
+    f.top = (wh - f.height) / 2 + margin;
 
     this.finalState = f;
     this.startingState = s;
