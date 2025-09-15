@@ -17,12 +17,6 @@ export default class Overlay {
     return this;
   }
 
-  add(element) {
-    this.element.innerHTML = '';
-    this.element.appendChild(element.element || element);
-    return this;
-  }
-
   show() {
     this.element.style.opacity = '1';
     this.element.style.zIndex = this.zIndex;

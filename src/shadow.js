@@ -123,4 +123,13 @@ export default class Shadow {
     // Start the animation
     requestAnimationFrame(frame);
   }
+
+  placeItself() {
+    document.body.appendChild(this.element);
+  }
+
+  destroyItself() {
+    if (!document.body.contains(this.element)) return;
+    document.body.removeChild(this.element);
+  }
 }

@@ -66,9 +66,8 @@ export default class LightBox {
       this.shadows[image.id] = shadow;
     }
 
+    if (!document.body.contains(shadow.element)) shadow.placeItself();
     shadow.open();
-
-    this.overlay.add(shadow);
     this.overlay.show();
   }
 
@@ -79,6 +78,7 @@ export default class LightBox {
 
     shadow.close();
     this.overlay.hide();
+    shadow.destroyItself();
   }
 
   closeAll() {
