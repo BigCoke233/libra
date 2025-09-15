@@ -87,7 +87,6 @@ export default class LightBox {
 
     shadow.close();
     this.overlay.hide();
-    shadow.destroyItself();
   }
 
   closeAll() {

@@ -117,6 +117,7 @@ export default class Shadow {
         requestAnimationFrame(frame);
       } else {
         this.element.classList.toggle('open');
+        if (!this.isOpen) this.destroyItself();
       }
     };
 
