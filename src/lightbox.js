@@ -14,7 +14,7 @@ export default class LightBox {
     this.container = container;
     this.initOverlay();
     this.initImages();
-    this.initKeyboardShortcuts();
+    this.initControls();
   }
 
   initOverlay() {
@@ -37,11 +37,16 @@ export default class LightBox {
     });
   }
 
-  initKeyboardShortcuts() {
+  initControls() {
+    // keyboard shortcuts
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' || e.key === ' ') {
         this.closeAll();
       }
+    });
+    // scroll to dismiss
+    document.body.addEventListener('wheel', e => {
+      this.closeAll();
     });
   }
 
