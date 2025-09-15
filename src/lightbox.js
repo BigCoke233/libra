@@ -1,9 +1,10 @@
-import utility from './utility.js';
+import Utility from './utility.js';
 import Overlay from './overlay.js';
 import Shadow from './shadow.js';
 
 export default class LightBox {
   overlay = new Overlay();
+  shadows = {};
 
   /**
    * ============
@@ -17,35 +18,34 @@ export default class LightBox {
   }
 
   init() {
-    const container = document.querySelectorAll(this.container);
     const images = document.querySelectorAll(`${this.container} img[data-libo]`);
 
     images.forEach(image => {
-      // generate unique id for image
-      const id = utility.generateUniqueId(image.src);
-      image.id = id;
-
-      // get parent and wrap image with a link if it's not already wrapped
-      const parent = image.parentElement;
-      let link;
-      if (!parent || parent.tagName !== 'A') {
-        link = document.createElement('a');
-        link.href = image.src;
-        link.dataset.liboLink = true;
-
-        parent.insertBefore(link, image);
-        link.appendChild(image);
-      } else {
-        link = parent;
-      }
-
+      image.id = Utility.hashCode(image.src); // generate unique id for image
+      const link = this.wrapInLink(image);
       // add event listener to open lightbox on click
       link.addEventListener('click', e => {
         e.preventDefault();
         this.openLightBox(image);
       });
-
     });
+  }
+
+  wrapInLink(image) {
+    // wrap image with a link if it's not already wrapped
+    const parent = image.parentElement;
+    let link;
+    if (!parent || parent.tagName !== 'A') {
+      link = document.createElement('a');
+      link.href = image.src;
+      link.dataset.liboLink = true;
+
+      parent.insertBefore(link, image);
+      link.appendChild(image);
+    } else {
+      link = parent;
+    }
+    return link;
   }
 
   /**
@@ -55,7 +55,11 @@ export default class LightBox {
    */
 
   openLightBox(image) {
-    const shadow = Shadow.find(image) || new Shadow(image);
+    const shadow = this.shadows[image.id] || new Shadow(image);
+    if (!this.shadows[image.id]) {
+      this.shadows[image.id] = shadow;
+    }
+
     shadow.open();
 
     this.overlay.add(shadow);

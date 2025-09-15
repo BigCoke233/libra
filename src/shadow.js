@@ -39,11 +39,6 @@ export default class Shadow {
     });
   }
 
-  static find(image) {
-    const shadowId = `libo-shadow-${image.id}`;
-    return document.getElementById(shadowId);
-  }
-
   calculateStartsAndFinals() {
     // get starting state
     this.startingState = {
