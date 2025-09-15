@@ -18,8 +18,8 @@ export default class Shadow {
     // create shadow image
     const shadowImage = document.createElement('img');
     shadowImage.src = image.src;
-    shadowImage.id = `libo-shadow-${image.id}`;
-    shadowImage.classList.add('libo-shadow');
+    shadowImage.id = `libra-shadow-${image.id}`;
+    shadowImage.classList.add('libra-shadow');
 
     // style and position shadow image
     shadowImage.style.top = image.offsetTop;

@@ -4,8 +4,8 @@ export default class Overlay {
 
   constructor() {
     const overlay = document.createElement('div');
-    overlay.id = 'libo-overlay';
-    overlay.classList.add('libo-overlay');
+    overlay.id = 'libra-overlay';
+    overlay.classList.add('libra-overlay');
 
     // initialized state
     overlay.style.zIndex = this.zIndexHidden;

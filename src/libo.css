@@ -1,4 +1,4 @@
-.libo-overlay {
+.libra-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -18,12 +18,12 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    .libo-overlay {
+    .libra-overlay {
         background-color: rgba(0, 0, 0, 0.75);
     }
 }
 
-.libo-shadow {
+.libra-shadow {
     position: absolute;
     transition-duration: 0.2s;
     transition-property: transform;
@@ -32,6 +32,6 @@
     cursor: pointer;
 }
 
-.libo-shadow.open {
+.libra-shadow.open {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }

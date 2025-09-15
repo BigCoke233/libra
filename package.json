@@ -1,23 +1,28 @@
 {
-  "name": "libo",
+  "name": "libra",
   "version": "1.0.0",
   "description": "Light-weight and focused JavaScript image lightbox plugin.",
   "keywords": [
     "lightbox"
   ],
-  "homepage": "https://github.com/BigCoke233/libo#readme",
+  "homepage": "https://github.com/BigCoke233/libra#readme",
   "bugs": {
-    "url": "https://github.com/BigCoke233/libo/issues"
+    "url": "https://github.com/BigCoke233/libra/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BigCoke233/libo.git"
+    "url": "git+https://github.com/BigCoke233/libra.git"
   },
   "license": "MIT",
   "author": "Eltrac",
   "type": "module",
   "source": "src/lightbox.js",
-  "main": "dist/lightbox.min.js",
+  "module": "dist/libra.min.js",
+  "targets": {
+		"module": {
+			"optimize": true
+		}
+	},
   "directories": {
     "test": "test"
   },

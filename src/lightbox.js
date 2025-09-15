@@ -26,7 +26,7 @@ export default class LightBox {
   }
 
   initImages() {
-    this.images = document.querySelectorAll(`${this.container} img[data-libo]`);
+    this.images = document.querySelectorAll(`${this.container} img[data-libra]`);
 
     function wrapInLink(image) {
       // wrap image with a link if it's not already wrapped
