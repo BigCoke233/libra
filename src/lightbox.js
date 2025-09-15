@@ -27,14 +27,34 @@ export default class LightBox {
 
   initImages() {
     this.images = document.querySelectorAll(`${this.container} img[data-libo]`);
-    this.images.forEach(image => {
-      image.id = crypto.randomUUID(); // generate unique id for image
-      const link = this.wrapInLink(image);
-      // add event listener to open lightbox on click
+
+    function wrapInLink(image) {
+      // wrap image with a link if it's not already wrapped
+      const parent = image.parentElement;
+      let link;
+      if (!parent || parent.tagName !== 'A') {
+        link = document.createElement('a');
+        link.href = image.src;
+        // replace image with the linked one
+        parent.insertBefore(link, image);
+        link.appendChild(image);
+      } else {
+        link = parent;
+      }
+      return link;
+    }
+
+    function addListener(link, image) {
       link.addEventListener('click', e => {
         e.preventDefault();
         this.openLightBox(image);
       });
+    }
+
+    this.images.forEach(image => {
+      image.id = crypto.randomUUID(); // generate unique id for image
+      const link = wrapInLink(image);
+      addListener(link, image);
     });
   }
 
@@ -49,23 +69,6 @@ export default class LightBox {
     document.body.addEventListener('wheel', e => {
       this.closeCurrent();
     });
-  }
-
-  wrapInLink(image) {
-    // wrap image with a link if it's not already wrapped
-    const parent = image.parentElement;
-    let link;
-    if (!parent || parent.tagName !== 'A') {
-      link = document.createElement('a');
-      link.href = image.src;
-      link.dataset.liboLink = true;
-
-      parent.insertBefore(link, image);
-      link.appendChild(image);
-    } else {
-      link = parent;
-    }
-    return link;
   }
 
   /**
