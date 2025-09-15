@@ -103,7 +103,7 @@ export default class Shadow {
       step++;
 
       // Continue animating until we reach the final step
-      if (step < steps) {
+      if (step <= steps) {
         requestAnimationFrame(frame);
       } else {
         this.element.classList.toggle('open');
