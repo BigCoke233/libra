@@ -44,17 +44,16 @@ export default class LightBox {
       return link;
     }
 
-    function addListener(link, image) {
+    this.images.forEach(image => {
+      // generate unique id for each image
+      image.id = crypto.randomUUID();
+      // make sure every image has a link
+      const link = wrapInLink(image);
+      // click link to open lightbox
       link.addEventListener('click', e => {
         e.preventDefault();
         this.openLightBox(image);
       });
-    }
-
-    this.images.forEach(image => {
-      image.id = crypto.randomUUID(); // generate unique id for image
-      const link = wrapInLink(image);
-      addListener(link, image);
     });
   }
 
