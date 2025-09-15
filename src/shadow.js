@@ -106,9 +106,6 @@ export default class Shadow {
       this.element.style.width = `${currentWidth}px`;
       this.element.style.height = `${currentHeight}px`;
 
-      // Log current size for debugging
-      console.log(`Step ${step}: ${currentTop}, ${currentLeft}`);
-
       // Increase the step count
       step++;
 
