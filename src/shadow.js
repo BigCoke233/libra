@@ -81,45 +81,28 @@ export default class Shadow {
 
   close() {
     this.isOpen = false;
-    this.animate(this.finalState, this.startingState);
+    this.element.style.transform = `matrix(1, 0, 0, 1, 0, 0)`;
+    setTimeout(() => {
+      this.destroyItself();
+    }, 300);
   }
 
   animate(starts, finals) {
-    // Set up the interval for smooth transition
-    const steps = 20; // Number of steps for smoothness
-    let step = 0;
+    // Calculate scaling factors based on width and height interpolation
+    const scaleX = finals.width / starts.width;
+    const scaleY = finals.height / starts.height;
 
-    // Using requestAnimationFrame for smoother animation
-    const frame = () => {
-      // Calculate the progress (from 0 to 1)
-      const progress = step / steps;
+    // Calculate the center of the starting and final positions
+    const startCenterX = starts.left + starts.width / 2;
+    const startCenterY = starts.top + starts.height / 2;
+    const finalCenterX = finals.left + finals.width / 2;
+    const finalCenterY = finals.top + finals.height / 2;
 
-      // Interpolate the current values based on progress
-      const currentTop = starts.top + (finals.top - starts.top) * progress;
-      const currentLeft = starts.left + (finals.left - starts.left) * progress;
-      const currentWidth = starts.width + (finals.width - starts.width) * progress;
-      const currentHeight = starts.height + (finals.height - starts.height) * progress;
+    const translateX = finalCenterX - startCenterX;
+    const translateY = finalCenterY - startCenterY;
 
-      // Update the element's style
-      this.element.style.top = `${currentTop}px`;
-      this.element.style.left = `${currentLeft}px`;
-      this.element.style.width = `${currentWidth}px`;
-      this.element.style.height = `${currentHeight}px`;
-
-      // Increase the step count
-      step++;
-
-      // Continue animating until we reach the final step
-      if (step <= steps) {
-        requestAnimationFrame(frame);
-      } else {
-        this.element.classList.toggle('open');
-        if (!this.isOpen) this.destroyItself();
-      }
-    };
-
-    // Start the animation
-    requestAnimationFrame(frame);
+    // Apply the transform with matrix (scale + translate)
+    this.element.style.transform = `matrix(${scaleX}, 0, 0, ${scaleY}, ${translateX}, ${translateY})`;
   }
 
   placeItself() {
