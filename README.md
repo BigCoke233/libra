@@ -29,6 +29,16 @@ Also, include [libra.css](https://github.com/BigCoke233/libra/blob/master/src/li
 <link rel="stylesheet" href="/src/libra.css" />
 ```
 
+Make sure your images all have their `data-libra` attribute.
+
+```html
+<div class="libra">
+  <img data-libra src="1.jpg" />
+  <img data-libra src="2.jpg" />
+  <!-- ... -->
+</div>
+```
+
 ## Development
 
 ```
