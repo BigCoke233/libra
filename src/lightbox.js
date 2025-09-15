@@ -2,7 +2,6 @@ import Overlay from './overlay.js';
 import Shadow from './shadow.js';
 
 export default class LightBox {
-  overlay = new Overlay();
   shadows = {};
 
   /**
@@ -13,13 +12,20 @@ export default class LightBox {
 
   constructor({ container }) {
     this.container = container;
-    this.init();
+    this.initOverlay();
+    this.initImages();
   }
 
-  init() {
-    const images = document.querySelectorAll(`${this.container} img[data-libo]`);
+  initOverlay() {
+    this.overlay = new Overlay();
+    this.overlay.element.addEventListener('click', e => {
+      this.closeAll();
+    });
+  }
 
-    images.forEach(image => {
+  initImages() {
+    this.images = document.querySelectorAll(`${this.container} img[data-libo]`);
+    this.images.forEach(image => {
       image.id = crypto.randomUUID(); // generate unique id for image
       const link = this.wrapInLink(image);
       // add event listener to open lightbox on click
@@ -58,9 +64,6 @@ export default class LightBox {
     const shadow = this.shadows[image.id] || new Shadow(image);
     if (!this.shadows[image.id]) {
       this.shadows[image.id] = shadow;
-      shadow.element.addEventListener('click', () => {
-        if (shadow.isOpen) this.closeLightBox(image);
-      });
     }
 
     shadow.open();
@@ -75,6 +78,13 @@ export default class LightBox {
     if (!shadow) return;
 
     shadow.close();
+    this.overlay.hide();
+  }
+
+  closeAll() {
+    this.images.forEach(image => {
+      this.closeLightBox(image);
+    });
     this.overlay.hide();
   }
 }
