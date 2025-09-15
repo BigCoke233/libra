@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/src/libo.css" />
+    </head>
+    <body>
+        <div class="libo">
+            <img
+                style="width:20%"
+                data-libo
+                src="test.jpg"
+            />
+        </div>
+        <script type="module">
+            import LightBox from './src/lightbox.js';
+            const lightbox = new LightBox({
+              container: '.libo'
+            });
+        </script>
+    </body>
+</html>
