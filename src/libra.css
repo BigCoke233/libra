@@ -27,8 +27,6 @@
     position: absolute;
     transition-duration: 0.2s;
     transition-property: transform;
-    display: block;
-    max-width: 100%;
     cursor: pointer;
 }
 

@@ -20,41 +20,17 @@ export default class LightBox {
 
   initOverlay() {
     this.overlay = new Overlay();
-    this.overlay.element.addEventListener('click', e => {
+    this.overlay.element.addEventListener('click', () => {
       this.closeCurrent();
     });
   }
 
   initImages() {
     this.images = document.querySelectorAll(this.selector);
-
-    function wrapInLink(image) {
-      // wrap image with a link if it's not already wrapped
-      const parent = image.parentElement;
-      let link;
-      if (!parent || parent.tagName !== 'A') {
-        link = document.createElement('a');
-        link.href = image.src;
-        // replace image with the linked one
-        parent.insertBefore(link, image);
-        link.appendChild(image);
-      } else {
-        link = parent;
-      }
-      return link;
-    }
-
     this.images.forEach(image => {
       if (image.tagName !== 'IMG') return;
-
       image.id = crypto.randomUUID(); // generate unique id for each image
-      const link = wrapInLink(image); // make sure every image has a link
-
-      // click link to open lightbox
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        this.openLightBox(image);
-      });
+      image.addEventListener('click', () => this.openLightBox(image));  // click image to open lightbox
     });
   }
 
