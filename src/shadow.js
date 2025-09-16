@@ -25,20 +25,20 @@ export default class Shadow {
 
   create(image) {
     // create shadow image
-    const shadowImage = document.createElement('img');
-    shadowImage.src = image.src;
-    shadowImage.id = `libra-shadow-${image.id}`;
-    shadowImage.classList.add('libra-shadow');
+    const shadow = document.createElement('img');
+    shadow.src = image.src;
+    shadow.id = `libra-shadow-${image.id}`;
+    shadow.classList.add('libra-shadow');
 
     // style and position shadow image
-    shadowImage.style.top = image.offsetTop;
-    shadowImage.style.left = image.offsetLeft;
-    shadowImage.style.width = image.offsetWidth;
-    shadowImage.style.height = image.offsetHeight;
-    shadowImage.style.zIndex = this.zIndex;
+    shadow.style.top = image.offsetTop;
+    shadow.style.left = image.offsetLeft;
+    shadow.style.width = image.offsetWidth;
+    shadow.style.height = image.offsetHeight;
+    shadow.style.zIndex = this.zIndex;
 
-    document.body.appendChild(shadowImage);
-    this.element = shadowImage;
+    document.body.appendChild(shadow);
+    this.element = shadow;
   }
 
   /**
