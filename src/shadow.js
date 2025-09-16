@@ -11,6 +11,7 @@ export default class Shadow {
    */
 
   constructor(image) {
+    this.original = image;
     this.create(image);
 
     this.startingState = {
@@ -49,6 +50,10 @@ export default class Shadow {
 
   open() {
     this.isOpen = true;
+
+    this.original.style.visibility = 'hidden';
+    if (!document.body.contains(this.element)) this.placeItself();
+
     Animation.transformMatrix(
       this.element,
       this.startingState,
@@ -58,6 +63,9 @@ export default class Shadow {
 
   close() {
     this.isOpen = false;
+
+    this.original.style.visibility = 'visible';
+
     Animation.resetTransformMatrix(this.element);
     setTimeout(() => this.destroyItself(), 300);
   }

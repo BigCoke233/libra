@@ -53,33 +53,25 @@ export default class LightBox {
    * ============
    */
 
+  // open lightbox = open shadow + show overlay
   open(image) {
-    // hide and store original image
-    image.style.visibility = 'hidden';
     this.currentImage = image;
 
-    // get shadow of this image
     const shadow = this.shadows[image.id] || new Shadow(image);
     if (!this.shadows[image.id]) {
       this.shadows[image.id] = shadow;
     }
 
-    // place and open shadow
-    if (!document.body.contains(shadow.element)) shadow.placeItself();
     shadow.open();
-
     this.overlay.show();
   }
 
+  // close lightbox = remove shadow + hide overlay
   close(image) {
-    // show and unstore original image
-    image.style.visibility = 'visible';
     this.currentImage = null;
 
-    // close shadow
-    const shadow = this.shadows[image.id];
-    if (!shadow) return;
-    shadow.close();
+    if (!this.shadows[image.id]) return;
+    this.shadows[image.id].close();
 
     this.overlay.hide();
   }
@@ -87,12 +79,5 @@ export default class LightBox {
   closeCurrent() {
     if (!this.currentImage) return;
     this.close(this.currentImage);
-  }
-
-  closeAll() {
-    this.images.forEach(image => {
-      this.close(image);
-    });
-    this.overlay.hide();
   }
 }
