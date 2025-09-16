@@ -14,11 +14,12 @@ export default class Shadow {
     this.original = image;
     this.create(image);
 
+    const rect = this.element.getBoundingClientRect();
     this.startingState = {
-      top: this.element.offsetTop,
-      left: this.element.offsetLeft,
-      width: this.element.offsetWidth,
-      height: this.element.offsetHeight
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
+      width: rect.width,
+      height: rect.height
     }
 
     return this;
@@ -32,10 +33,11 @@ export default class Shadow {
     shadow.classList.add('libra-shadow');
 
     // style and position shadow image
-    shadow.style.top = image.offsetTop;
-    shadow.style.left = image.offsetLeft;
-    shadow.style.width = image.offsetWidth;
-    shadow.style.height = image.offsetHeight;
+    const rect = image.getBoundingClientRect();
+    shadow.style.top = rect.top + window.scrollY;
+    shadow.style.left = rect.left + window.scrollX;
+    shadow.style.width = rect.width;
+    shadow.style.height = rect.height;
     shadow.style.zIndex = this.zIndex;
 
     document.body.appendChild(shadow);
