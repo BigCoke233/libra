@@ -24,7 +24,7 @@
 }
 
 .libra-shadow {
-    position: fixed;
+    position: absolute;
     transition-duration: 0.2s;
     transition-property: transform;
     display: block;

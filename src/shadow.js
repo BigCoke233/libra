@@ -10,7 +10,6 @@ export default class Shadow {
 
   constructor(image) {
     this.create(image);
-    this.calculateStartsAndFinals();
     return this;
   }
 
@@ -33,39 +32,40 @@ export default class Shadow {
   }
 
   calculateStartsAndFinals() {
-    // get starting state
-    const s = {
+    // snapshot current state
+    const starts = {
       top: this.element.offsetTop,
       left: this.element.offsetLeft,
       width: this.element.offsetWidth,
       height: this.element.offsetHeight
+    };
+
+    let finals = {}
+
+    const margin = 50
+    const ratio = this.element.naturalWidth / this.element.naturalHeight;
+    const ww = window.innerWidth - 2*margin;
+    const wh = window.innerHeight - 2*margin;
+
+    if (this.element.naturalWidth > ww) {
+      finals.width = ww;
+      finals.height = ww / ratio;
+      if (finals.height > wh) {
+        finals.height = wh;
+        finals.width = wh * ratio;
+      }
+    } else {
+      finals.width = this.element.offsetWidth;
+      finals.height = this.element.offsetHeight;
     }
 
-    const f = {};
-    const margin = 50;
+    finals.top = (wh - finals.height) / 2 + window.scrollY + margin;
+    finals.left = (ww - finals.width) / 2 + window.scrollX + margin;
 
-    // calculate final size
-    const nw = this.element.naturalWidth;
-    const nh = this.element.naturalHeight;
-    const ratio = nw / nh;
+    this.startingState = starts;
+    this.finalState = finals;
 
-    const ww = window.innerWidth - margin*2;
-    const wh = window.innerHeight - margin*2;
-
-    f.width = Math.min(nw, ww);
-    f.height = f.width / ratio;
-
-    if (f.height >= wh) {
-      f.height = wh;
-      f.width = f.height * ratio;
-    }
-
-    // calculate final position
-    f.left = (ww - f.width) / 2 + margin;
-    f.top = (wh - f.height) / 2 + margin;
-
-    this.finalState = f;
-    this.startingState = s;
+    return { starts, finals };
   }
 
   /**
@@ -76,12 +76,15 @@ export default class Shadow {
 
   open() {
     this.isOpen = true;
+    this.calculateStartsAndFinals();
     this.animate(this.startingState, this.finalState)
   }
 
   close() {
     this.isOpen = false;
     this.element.style.transform = `matrix(1, 0, 0, 1, 0, 0)`;
+    this.calculateStartsAndFinals();
+    this.animate(this.finalState, this.startingState)
     setTimeout(() => {
       this.destroyItself();
     }, 300);
