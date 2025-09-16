@@ -24,9 +24,7 @@
         </div>
         <script type="module">
             import LightBox from '/dist/libra.min.js';
-            const lightbox = new LightBox({
-              container: '.libra'
-            });
+            new LightBox({ selector: 'img[data-libra]' });
         </script>
     </body>
 </html>

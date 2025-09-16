@@ -11,8 +11,8 @@ export default class LightBox {
    * ============
    */
 
-  constructor({ container }) {
-    this.container = container;
+  constructor({ selector }) {
+    this.selector = selector;
     this.initOverlay();
     this.initImages();
     this.initControls();
@@ -26,7 +26,7 @@ export default class LightBox {
   }
 
   initImages() {
-    this.images = document.querySelectorAll(`${this.container} img[data-libra]`);
+    this.images = document.querySelectorAll(this.selector);
 
     function wrapInLink(image) {
       // wrap image with a link if it's not already wrapped
@@ -45,10 +45,11 @@ export default class LightBox {
     }
 
     this.images.forEach(image => {
-      // generate unique id for each image
-      image.id = crypto.randomUUID();
-      // make sure every image has a link
-      const link = wrapInLink(image);
+      if (image.tagName !== 'IMG') return;
+
+      image.id = crypto.randomUUID(); // generate unique id for each image
+      const link = wrapInLink(image); // make sure every image has a link
+
       // click link to open lightbox
       link.addEventListener('click', e => {
         e.preventDefault();
