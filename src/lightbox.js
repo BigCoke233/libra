@@ -30,7 +30,7 @@ export default class LightBox {
     this.images.forEach(image => {
       if (image.tagName !== 'IMG') return;
       image.id = crypto.randomUUID(); // generate unique id for each image
-      image.addEventListener('click', () => this.openLightBox(image));  // click image to open lightbox
+      image.addEventListener('click', () => this.open(image));  // click image to open lightbox
     });
   }
 
@@ -53,7 +53,7 @@ export default class LightBox {
    * ============
    */
 
-  openLightBox(image) {
+  open(image) {
     // hide and store original image
     image.style.visibility = 'hidden';
     this.currentImage = image;
@@ -71,7 +71,7 @@ export default class LightBox {
     this.overlay.show();
   }
 
-  closeLightBox(image) {
+  close(image) {
     // show and unstore original image
     image.style.visibility = 'visible';
     this.currentImage = null;
@@ -86,12 +86,12 @@ export default class LightBox {
 
   closeCurrent() {
     if (!this.currentImage) return;
-    this.closeLightBox(this.currentImage);
+    this.close(this.currentImage);
   }
 
   closeAll() {
     this.images.forEach(image => {
-      this.closeLightBox(image);
+      this.close(image);
     });
     this.overlay.hide();
   }
