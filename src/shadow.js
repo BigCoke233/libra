@@ -83,8 +83,6 @@ export default class Shadow {
   close() {
     this.isOpen = false;
     this.element.style.transform = `matrix(1, 0, 0, 1, 0, 0)`;
-    this.calculateStartsAndFinals();
-    this.animate(this.finalState, this.startingState)
     setTimeout(() => {
       this.destroyItself();
     }, 300);
