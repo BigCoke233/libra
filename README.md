@@ -14,22 +14,13 @@ Then import it as a module:
 
 ```html
 <script type="module">
-  import LightBox from '/dist/libra.min.js';
-  const lightbox = new LightBox({
-    container: '.libra' // where your images are contained
-                        // e.g. if your post content is in a div with class "post-content"
-                        //      then you can set container: '.post-content'
-  });
+    import LightBox from '/dist/libra.min.js';
+    new LightBox({ selector: 'img[data-libra]' });
+    // specify your own selector if needed
 </script>
 ```
 
-Also, include [libra.css](https://github.com/BigCoke233/libra/blob/master/src/libra.css).
-
-```html
-<link rel="stylesheet" href="/src/libra.css" />
-```
-
-Make sure your images all have their `data-libra` attribute.
+Make sure your images all have their `data-libra` attribute, or any other selector you've just specified.
 
 ```html
 <div class="libra">
@@ -37,6 +28,12 @@ Make sure your images all have their `data-libra` attribute.
   <img data-libra src="2.jpg" />
   <!-- ... -->
 </div>
+```
+
+Also, include [libra.css](https://github.com/BigCoke233/libra/blob/master/src/libra.css).
+
+```html
+<link rel="stylesheet" href="/src/libra.css" />
 ```
 
 ## Development
