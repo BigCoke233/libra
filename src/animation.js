@@ -10,13 +10,14 @@ export default class Animation {
     if (element.naturalWidth > ww) {
       finals.width = ww;
       finals.height = ww / ratio;
-      if (finals.height > wh) {
-        finals.height = wh;
-        finals.width = wh * ratio;
-      }
     } else {
-      finals.width = element.offsetWidth;
-      finals.height = element.offsetHeight;
+      finals.width = element.naturalWidth;
+      finals.height = element.naturalHeight;
+    }
+
+    if (finals.height > wh) {
+      finals.height = wh;
+      finals.width = wh * ratio;
     }
 
     finals.top = (wh - finals.height) / 2 + window.scrollY + margin;
