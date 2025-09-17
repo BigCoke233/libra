@@ -1,8 +1,10 @@
+import config from './config';
+
 export default class Animation {
   static calculateFinalState(element) {
     let finals = {}
 
-    const margin = 50
+    const margin = config.margin;
     const nw = element.naturalWidth;
     const nh = element.naturalHeight;
     const ratio = nw / nh;

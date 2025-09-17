@@ -1,5 +1,7 @@
-import Overlay from './overlay.js';
-import Shadow from './shadow.js';
+import Overlay from './overlay';
+import Shadow from './shadow';
+import config from './config';
+import { setConfig } from './config';
 
 export default class LightBox {
   currentImage = null;
@@ -11,8 +13,9 @@ export default class LightBox {
    * ============
    */
 
-  constructor({ selector }) {
-    this.selector = selector;
+  constructor(config) {
+    setConfig(config);
+
     this.initOverlay();
     this.initImages();
     this.initControls();
@@ -26,7 +29,7 @@ export default class LightBox {
   }
 
   initImages() {
-    this.images = document.querySelectorAll(this.selector);
+    this.images = document.querySelectorAll(config.selector);
     this.images.forEach(image => {
       if (image.tagName !== 'IMG') return;
       image.id = crypto.randomUUID(); // generate unique id for each image
