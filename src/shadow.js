@@ -12,15 +12,16 @@ export default class Shadow {
 
   constructor(image) {
     this.original = image;
-    this.create(image);
 
-    const rect = this.element.getBoundingClientRect();
-    this.startingState = {
+    const rect = this.original.getBoundingClientRect();
+    this.originalPosition = {
       top: rect.top + window.scrollY,
       left: rect.left + window.scrollX,
       width: rect.width,
       height: rect.height
     }
+
+    this.create(image);
 
     return this;
   }
@@ -33,11 +34,10 @@ export default class Shadow {
     shadow.classList.add('libra-shadow');
 
     // style and position shadow image
-    const rect = image.getBoundingClientRect();
-    shadow.style.top = rect.top + window.scrollY;
-    shadow.style.left = rect.left + window.scrollX;
-    shadow.style.width = rect.width;
-    shadow.style.height = rect.height;
+    shadow.style.top = `${this.originalPosition.top}px`;
+    shadow.style.left = `${this.originalPosition.left}px`;
+    shadow.style.width = `${this.originalPosition.width}px`;
+    shadow.style.height = `${this.originalPosition.height}px`;
     shadow.style.zIndex = this.zIndex;
 
     document.body.appendChild(shadow);
@@ -58,7 +58,7 @@ export default class Shadow {
 
     Animation.transformMatrix(
       this.element,
-      this.startingState,
+      this.originalPosition,
       Animation.calculateFinalState(this.element)
     );
   }
