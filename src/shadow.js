@@ -52,6 +52,7 @@ export default class Shadow {
 
   open() {
     this.isOpen = true;
+    this.element.classList.add('open');
 
     this.original.style.visibility = 'hidden';
     if (!document.body.contains(this.element)) this.placeItself();
@@ -65,6 +66,7 @@ export default class Shadow {
 
   close() {
     this.isOpen = false;
+    this.element.classList.remove('open');
 
     this.original.style.visibility = 'visible';
 
