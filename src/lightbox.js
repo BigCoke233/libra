@@ -41,14 +41,12 @@ export default class LightBox {
   initControls() {
     // keyboard shortcuts
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' || e.key === ' ') {
+      if (e.key === 'Escape' || e.key === ' ')
         this.closeCurrent();
-      }
     });
     // scroll to dismiss
-    document.body.addEventListener('wheel', e => {
-      this.closeCurrent();
-    });
+    document.body.addEventListener('wheel', e => this.closeCurrent());
+    document.body.addEventListener('touchmove', e => this.closeCurrent());
   }
 
   /**
