@@ -1,4 +1,5 @@
 import Animation from './animation.js'
+import config from './config'
 
 export default class Shadow {
   zIndex = '1000'
@@ -15,8 +16,8 @@ export default class Shadow {
 
     const rect = this.original.getBoundingClientRect();
     this.originalPosition = {
-      top: rect.top + window.scrollY,
-      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY + config.offset.y,
+      left: rect.left + window.scrollX + config.offset.x,
       width: rect.width,
       height: rect.height
     }

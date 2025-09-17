@@ -21,8 +21,8 @@ export default class Animation {
       finals.width = wh * ratio;
     }
 
-    finals.top = (wh - finals.height) / 2 + window.scrollY + margin;
-    finals.left = (ww - finals.width) / 2 + window.scrollX + margin;
+    finals.top = (wh - finals.height) / 2 + window.scrollY + margin + config.offset.y;
+    finals.left = (ww - finals.width) / 2 + window.scrollX + margin + config.offset.x;
 
     return finals;
   }
