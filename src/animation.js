@@ -3,18 +3,17 @@ export default class Animation {
     let finals = {}
 
     const margin = 50
-    const ratio = element.naturalWidth / element.naturalHeight;
+    const nw = element.naturalWidth;
+    const nh = element.naturalHeight;
+    const ratio = nw / nh;
     const ww = window.innerWidth - 2*margin;
     const wh = window.innerHeight - 2*margin;
 
-    if (element.naturalWidth > ww) {
-      finals.width = ww;
-      finals.height = ww / ratio;
-    } else {
-      finals.width = element.naturalWidth;
-      finals.height = element.naturalHeight;
-    }
+    // size image based on width first
+    finals.width =  (nw > ww) ? ww : nw;
+    finals.height = (nw > ww) ? ww / ratio : nh;
 
+    // if height is too big, adjust based on height
     if (finals.height > wh) {
       finals.height = wh;
       finals.width = wh * ratio;
