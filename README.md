@@ -41,11 +41,23 @@ You can configure Libra.js by passing an object to the constructor. The defaults
 
 ```js
 new LightBox({
-  selector: '[data-libra]', // Selector for images to be lightboxed
-  margin: 50,               // Margin around the lightbox
-  offset: { x: 0, y: 0 }    // Offset for the lightbox position
+  selector: "[data-libra]", // Selector for images to be lightboxed
+  margin: 50, // Margin around the lightbox
+  offset: { x: 0, y: 0 }, // Offset for the lightbox position
+  transitionDuration: 200, // Animation duration in milliseconds
+  imageCursor: "zoom-in", // Cursor style for hoverable images
 });
 ```
+
+### Z-index Configuration
+
+Z-index values are managed through CSS classes for better maintainability:
+
+- `.libra-overlay.libra-visible`: z-index 900 (overlay when visible)
+- `.libra-overlay.libra-hidden`: z-index -100 (overlay when hidden)
+- `.libra-shadow`: z-index 1000 (shadow image)
+
+You can customize these values by overriding the CSS classes in your own stylesheet.
 
 ## Development
 
