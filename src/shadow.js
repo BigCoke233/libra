@@ -12,15 +12,7 @@ export default class Shadow {
 
   constructor(image) {
     this.original = image;
-
-    const rect = this.original.getBoundingClientRect();
-    this.originalPosition = {
-      top: rect.top + window.scrollY + config.offset.y,
-      left: rect.left + window.scrollX + config.offset.x,
-      width: rect.width,
-      height: rect.height
-    }
-
+    this.fetchOriginalPosition();
     this.create(image);
 
     return this;
@@ -32,26 +24,16 @@ export default class Shadow {
     shadow.src = image.src;
     shadow.id = `libra-shadow-${image.id}`;
     shadow.classList.add('libra-shadow');
-
-    // style and position shadow image
-    shadow.style.top = this.originalPosition.top + 'px';
-    shadow.style.left = this.originalPosition.left + 'px';
-    shadow.style.width = this.originalPosition.width + 'px';
-    shadow.style.height = this.originalPosition.height + 'px';
-    // Set transition duration from config
     shadow.style.transitionDuration = config.transitionDuration + 'ms';
 
-    document.body.appendChild(shadow);
     this.element = shadow;
+
+    // set positioning and place shadow element
+    this.positionShadow();
+    this.placeItself();
   }
 
-  /**
-   * ============
-   * Actions
-   * ============
-   */
-
-  updateOriginalPosition() {
+  fetchOriginalPosition() {
     const rect = this.original.getBoundingClientRect();
     this.originalPosition = {
       top: rect.top + window.scrollY + config.offset.y,
@@ -61,16 +43,26 @@ export default class Shadow {
     };
   }
 
+  positionShadow() {
+    this.element.style.top = this.originalPosition.top + 'px';
+    this.element.style.left = this.originalPosition.left + 'px';
+    this.element.style.width = this.originalPosition.width + 'px';
+    this.element.style.height = this.originalPosition.height + 'px';
+  }
+
+  /**
+   * ============
+   * Actions
+   * ============
+   */
+
   open() {
     this.isOpen = true;
     this.element.classList.add('open');
 
     // Update original position before animation in case viewport changed
-    this.updateOriginalPosition();
-    this.element.style.top = `${this.originalPosition.top}px`;
-    this.element.style.left = `${this.originalPosition.left}px`;
-    this.element.style.width = `${this.originalPosition.width}px`;
-    this.element.style.height = `${this.originalPosition.height}px`;
+    this.fetchOriginalPosition();
+    this.positionShadow();
 
     this.original.style.visibility = 'hidden';
     if (!document.body.contains(this.element)) this.placeItself();
