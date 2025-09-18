@@ -33,8 +33,8 @@ export default class LightBox {
     this.images.forEach(image => {
       if (image.tagName !== 'IMG') return;
       image.id = crypto.randomUUID(); // generate unique id for each image
-      image.style.cursor = 'zoom-in';
-      image.addEventListener('click', () => this.open(image));  // click image to open lightbox
+      image.style.cursor = config.imageCursor;
+      image.addEventListener('click', () => this.open(image)); // click image to open lightbox
     });
   }
 

@@ -1,8 +1,10 @@
 const config = {
   selector: '[data-libra]',
   margin: 50,
-  offset: { x: 0, y: 0 }
-}
+  offset: { x: 0, y: 0 },
+  transitionDuration: 200, // milliseconds
+  imageCursor: 'zoom-in',
+};
 
 function deepMerge(target, source) {
   for (const key in source) {
