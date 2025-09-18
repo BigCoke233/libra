@@ -75,11 +75,26 @@ export default class Shadow {
     this.original.style.visibility = 'hidden';
     if (!document.body.contains(this.element)) this.placeItself();
 
-    Animation.transformMatrix(
-      this.element,
-      this.originalPosition,
-      Animation.calculateFinalState(this.element)
-    );
+    // Wait for image to load before animating
+    if (this.element.naturalWidth === 0 || this.element.naturalHeight === 0) {
+      this.element.addEventListener(
+        'load',
+        () => {
+          Animation.transformMatrix(
+            this.element,
+            this.originalPosition,
+            Animation.calculateFinalState(this.element),
+          );
+        },
+        { once: true },
+      );
+    } else {
+      Animation.transformMatrix(
+        this.element,
+        this.originalPosition,
+        Animation.calculateFinalState(this.element),
+      );
+    }
   }
 
   close() {
