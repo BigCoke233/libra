@@ -34,10 +34,10 @@ export default class Shadow {
     shadow.classList.add('libra-shadow');
 
     // style and position shadow image
-    shadow.style.top = `${this.originalPosition.top}px`;
-    shadow.style.left = `${this.originalPosition.left}px`;
-    shadow.style.width = `${this.originalPosition.width}px`;
-    shadow.style.height = `${this.originalPosition.height}px`;
+    shadow.style.top = this.originalPosition.top + 'px';
+    shadow.style.left = this.originalPosition.left + 'px';
+    shadow.style.width = this.originalPosition.width + 'px';
+    shadow.style.height = this.originalPosition.height + 'px';
     // Set transition duration from config
     shadow.style.transitionDuration = config.transitionDuration + 'ms';
 
