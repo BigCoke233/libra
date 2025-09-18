@@ -51,9 +51,26 @@ export default class Shadow {
    * ============
    */
 
+  updateOriginalPosition() {
+    const rect = this.original.getBoundingClientRect();
+    this.originalPosition = {
+      top: rect.top + window.scrollY + config.offset.y,
+      left: rect.left + window.scrollX + config.offset.x,
+      width: rect.width,
+      height: rect.height,
+    };
+  }
+
   open() {
     this.isOpen = true;
     this.element.classList.add('open');
+
+    // Update original position before animation in case viewport changed
+    this.updateOriginalPosition();
+    this.element.style.top = `${this.originalPosition.top}px`;
+    this.element.style.left = `${this.originalPosition.left}px`;
+    this.element.style.width = `${this.originalPosition.width}px`;
+    this.element.style.height = `${this.originalPosition.height}px`;
 
     this.original.style.visibility = 'hidden';
     if (!document.body.contains(this.element)) this.placeItself();
