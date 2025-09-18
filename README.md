@@ -1,6 +1,6 @@
 # ♎️ Libra.js
 
-A lightweight, focused, vanilla JavaScript image lightbox library, only around ✨**3KB** after minified.
+A lightweight, focused, vanilla JavaScript image lightbox library, only ✨**3~4KB** after minified.
 
 ![screenshot](https://github.com/BigCoke233/libra/blob/master/screenshot.gif)
 
