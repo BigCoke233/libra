@@ -2,8 +2,7 @@ import Animation from './animation.js'
 import config from './config'
 
 export default class Shadow {
-  zIndex = '1000'
-  isOpen = false
+  isOpen = false;
 
   /**
    * ============
@@ -39,7 +38,8 @@ export default class Shadow {
     shadow.style.left = `${this.originalPosition.left}px`;
     shadow.style.width = `${this.originalPosition.width}px`;
     shadow.style.height = `${this.originalPosition.height}px`;
-    shadow.style.zIndex = this.zIndex;
+    // Set transition duration from config
+    shadow.style.transitionDuration = config.transitionDuration + 'ms';
 
     document.body.appendChild(shadow);
     this.element = shadow;
