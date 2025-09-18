@@ -101,10 +101,12 @@ export default class Shadow {
     this.isOpen = false;
     this.element.classList.remove('open');
 
-    this.original.style.visibility = 'visible';
-
     Animation.resetTransformMatrix(this.element);
-    setTimeout(() => this.destroyItself(), 300);
+    // Wait for animation to complete before showing original and destroying shadow
+    setTimeout(() => {
+      this.original.style.visibility = 'visible';
+      this.destroyItself();
+    }, config.transitionDuration);
   }
 
   placeItself() {
