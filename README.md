@@ -1,3 +1,8 @@
+> [!warning]
+> This repository has been moved to [Codeberg](https://codeberg.org/eltrac/libra). This GitHub repository is archived since Feburary 10, 2026.
+
+---
+
 # ♎️ Libra.js
 
 A lightweight, focused, vanilla JavaScript image lightbox library, only ✨**3~4KB** after minified.
