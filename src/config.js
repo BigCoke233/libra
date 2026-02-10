@@ -1,5 +1,9 @@
 const config = {
+    // selects images that load libra.js
     selector: '[data-libra]',
+
+    // margin between viewport and zoomed image
+    // in px
     margin: 50,
 
     // in small screens, it's best to not use margins
@@ -7,7 +11,9 @@ const config = {
     // define on screen smaller than what size, margin is set to 0
     zeroMarginBreakpoint: 768,
 
+    // shifts the zoomed image if needed
     offset: { x: 0, y: 0 },
+
     transitionDuration: 200, // milliseconds
     imageCursor: 'zoom-in',
 };
