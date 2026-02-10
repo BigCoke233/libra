@@ -43,6 +43,7 @@ You can configure Libra.js by passing an object to the constructor. The defaults
 new LightBox({
   selector: "[data-libra]", // Selector for images to be lightboxed
   margin: 50, // Margin around the lightbox
+  zeroMarginBreakpoint: 786, // When to not use margin (screen width)
   offset: { x: 0, y: 0 }, // Offset for the lightbox position
   transitionDuration: 200, // Animation duration in milliseconds
   imageCursor: "zoom-in", // Cursor style for hoverable images
@@ -51,7 +52,7 @@ new LightBox({
 
 ### Z-index Configuration
 
-Z-index values are managed through CSS classes for better maintainability:
+Z-index values are managed through CSS classes:
 
 - `.libra-overlay.libra-visible`: z-index 900 (overlay when visible)
 - `.libra-overlay.libra-hidden`: z-index -100 (overlay when hidden)
@@ -61,10 +62,18 @@ You can customize these values by overriding the CSS classes in your own stylesh
 
 ## Development
 
+```shell
+pnpm install
+pnpm build
 ```
-npm install
-npm run build
+
+There is no `dev` command. To develop, simply start a HTTP server at root directory, for example, with Python.
+
+```shell
+python -m http.server 8080
 ```
+
+Then open `localhost:8080/test` in your browser.
 
 ## Philosophy
 
