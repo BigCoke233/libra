@@ -1,9 +1,15 @@
 const config = {
-  selector: '[data-libra]',
-  margin: 50,
-  offset: { x: 0, y: 0 },
-  transitionDuration: 200, // milliseconds
-  imageCursor: 'zoom-in',
+    selector: '[data-libra]',
+    margin: 50,
+
+    // in small screens, it's best to not use margins
+    // otherwise, the zoomed image gets even smaller
+    // define on screen smaller than what size, margin is set to 0
+    zeroMarginBreakpoint: 768,
+
+    offset: { x: 0, y: 0 },
+    transitionDuration: 200, // milliseconds
+    imageCursor: 'zoom-in',
 };
 
 function deepMerge(target, source) {

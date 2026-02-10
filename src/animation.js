@@ -4,7 +4,11 @@ export default class Animation {
   static calculateFinalState(element) {
     let finals = {}
 
-    const margin = config.margin;
+    let margin = config.margin;
+    if (window.innerWidth <= config.zeroMarginBreakpoint) {
+        margin = 0
+    }
+
     const nw = element.naturalWidth;
     const nh = element.naturalHeight;
     const ratio = nw / nh;
